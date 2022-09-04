@@ -5,17 +5,30 @@ public class Hello {
     Scanner scanner = new Scanner(System.in);
     System.out.print("Input your name: ");
     String name = scanner.nextLine();
-
-    int sum = 0;
-    for (int i = 0; i < name.length(); i++) {
-      sum += (int) name.charAt(i);
-    }
-    int mean = sum / name.length();
-
     scanner.close();
-    System.out.println("Hello, " + name + ".");
-    System.out.println("The mean value of your name is " +
-      mean + ", whose corresponding Unicode character is '" +
-      (char) mean + "'.");
+
+    String[] phoneticAlphabet = {"Alfa", "Bravo", "Charlie", "Delta",
+      "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett", "Kilo", "Lima",
+      "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra",
+      "Tango", "Uniform", "Victor", "Whiskey", "X-ray", "Yankee", "Zulu"};
+
+    StringBuilder natoName = new StringBuilder(); 
+    for (int i = 0; i < name.length(); i++) {
+      char letter = Character.toUpperCase(name.charAt(i));
+      if (letter >= 65 && letter <= 90) {
+        natoName.append(phoneticAlphabet[
+          (int) Character.toUpperCase(letter) - 'A']);
+      } else if (letter == 'Å') {
+        natoName.append("Alfa Alfa");
+      } else if (letter == 'Ä') {
+        natoName.append("Alfa Echo");
+      } else if (letter == 'Ö') {
+        natoName.append("Oscar Echo");
+      }
+      if (i < name.length() - 1) {
+        natoName.append(" ");
+      }
+    }
+    System.out.println("Hello, " + natoName.toString() + ".");
   }
 }
